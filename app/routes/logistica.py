@@ -74,7 +74,7 @@ def postar():
         db.session.add(item)
     db.session.commit()
     
-    return f'{problema['codigo_veiculo']}'
+    return f'{problema["codigo_veiculo"]}'
 
 
 
