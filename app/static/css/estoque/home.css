@@ -1,0 +1,22 @@
+.sub_body{
+    display: grid;
+    justify-items: center;
+    background-color: black;
+}
+.nav_bar{
+    display: grid;
+    align-items: center;
+    width: 60%;
+    height: 50px;
+}
+.nav_bar ul{
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.exibir_estoque{
+    background-color: aqua;
+ 
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <title>Grupo Mar</title>
+</head>
+<body>
+    <section class="titles">
+        Grupo Mar
+    </section>
+    <main>
+        <div class="container_login">
+            <div class="titulos">
+                <span class="titulo">Login</span>
+                <span class="suport"><a href="">Suporte</a></span>
+            </div>
+
+            <form action="/" method="post" class="inputs_login">
+
+                <div class="input_group">
+                    <input class="input_text" type="text" name="user" value="{{usuario}}"  minlength="1"   autocomplete="off" required>
+                    <span>Login:</span>
+                </div>
+                <div class="input_group">
+                    <input class="input_text" type="password" name="pwd"  minlength="1     "   autocomplete="off" required>
+                    <span>Senha:</span>
+                </div>
+                
+                <button class="btn_entrar" type="submit" value="">Entrar</button>
+            </form>
+            </div>
+    </main>
+
+    <footer>
+        <div class="titulo_footer">Desenvolvido por <a href="">Astro Code</a></div>
+        <div class="copy_footer">©  astrocode 2025 todos os direitos reservados</div>
+    </footer>
+</body>
+</html>

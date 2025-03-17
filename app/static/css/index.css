@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Italiana';
+}
+body{
+    background-color: #0C2538;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    height: 100vh;
+    width: 100vw;
+    grid-template-rows: 10% 80% 10%;
+}   
+.titles{
+    font-size: 6vw;
+    color: white;
+    padding-top: 30px;
+}
+.container_login{
+    box-shadow:10px 10px 10px  #000000 ;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    width: 40vw;
+    border-radius: 20px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.titulos{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    
+}
+
+.titulo{
+    color: black;
+    font-size: 4vw;
+}
+
+.suport{
+    font-size: 1.5vw;
+}
+.inputs_login{
+    position: relative;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    width: 80%;
+    margin-top: 10px;
+}
+
+.inputs_login input{
+    width: 20vw;
+    height: 30px;
+    font-size: 16px;
+    padding-left: 8px;
+    outline: none;
+    border-radius: 6px;
+    border: 1px solid #92121200;
+    
+}
+
+.input_group span{
+    color: white;
+    position: absolute;
+    left: 5px;
+    top:7px;
+    pointer-events: none;   
+    transition: .5s;
+    font-size: 1vw;
+}
+
+.input_group input:focus ~ span, 
+.input_group textarea:focus ~ span,
+.input_group input:valid ~ span,
+.input_group textarea:valid ~ span{
+    transform: translateY(-25px);
+    font-size: 16px;
+    opacity: 1;
+    color: rgb(0, 0, 0);
+    filter: drop-shadow(2px 2px 4px #000000);
+}
+
+.input_group{
+    background-color: #24274100;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+.input_text{
+    background-color: #197891;
+    color: white;
+}
+.btn_entrar{
+    font-size: 22px;
+    color:white;    
+    background-color: #197891;
+    
+    border-radius: 10px;
+    width: 40%;
+    height: 30px;
+    border: 0px;
+    box-shadow: -4px 4px 8px 4px rgba(0, 0, 0, 0.787);
+    cursor: pointer;
+}
+
+footer{
+    width: 30vw;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 1px;
+    border: 1px solid white;
+    padding: 5px;
+}
+
+.titulo_footer{
+    text-align: center;
+    color: white;
+    font-size: 1vw;
+}
+
+.titulo_footer a{
+    color: rgb(60, 60, 248);
+}
+.copy_footer{
+    text-align: center;
+    
+    color: white;
+    font-size: 1vw;
+}
+
+
+@media screen and (max-width: 500px){
+    .container_login{
+        box-shadow:10px 10px 10px  #000000 ;
+        background-color: rgb(255, 255, 255);
+        padding: 20px;
+        width: 60vw;
+        border-radius: 20px;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .titulo{
+        color: black;
+        font-size: 10vw;
+    }
+    
+    .suport{
+        font-size: 6vw;
+    }
+    .inputs_login{
+        padding-top: 10px;
+    }
+    .inputs_login input{
+        width: 45vw;
+        height: 30px;
+        font-size: 30px;
+        outline: none;
+        border-radius: 6px;
+        border: 1px solid #92121200;
+        
+    }
+
+    .input_group span{
+        color: white;
+        position: absolute;
+        left: 5px;
+        top:7px;
+        pointer-events: none;   
+        transition: .5s;
+        font-size: 5vw;
+    }
+    .input_group input:focus ~ span, 
+    .input_group textarea:focus ~ span,
+    .input_group input:valid ~ span,
+    .input_group textarea:valid ~ span{
+        transform: translateY(-30px);
+        font-size: 20px;
+       
+    }
+
+
+
+    footer{
+        width: 80vw;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 1px;
+        border: 1px solid white;
+        padding: 5px;
+    }
+    
+    .titulo_footer{
+        text-align: center;
+        color: white;
+        font-size: 4vw;
+    }
+    
+    .titulo_footer a{
+        color: rgb(60, 60, 248);
+    }
+    .copy_footer{
+        text-align: center;
+        
+        color: white;
+        font-size: 4vw;
+    }    
+}
+

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-list</title>
+</head>
+<body>
+    <h1>CHECK-LIST</h1>
+    <div class="dados_veiculo">
+        <h2>Dados do veiculo</h2>
+        <span>Placa: {{veiculo.placa}}</span> <br>
+        <span>Modelo: {{veiculo.modelo}}</span>
+    </div>
+    {% for item in list_item %}
+        {{item}} <br>
+    {%endfor%}
+</body>
+</html>

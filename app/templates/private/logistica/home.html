@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/logistica/motorista.css">
+    <title>Inicio</title>
+</head>
+<body>
+    <h1>Bem vindo {{current_user.user}} <h1>
+    <section class="container_veiculos">
+        
+        {% for veiculo in veiculos %} 
+            <a href="/logistica/veiculo/{{veiculo.placa}}" class="card_veiculo">
+                <div class="foto_veiculo">
+                    <img src="/static/imgs/veiculos/{{veiculo.placa}}.jpeg" alt="bongo">
+                </div>
+                <div class="placa">{{veiculo.placa}}</div>
+            </a>
+            
+        {%endfor%} 
+
+    </section>
+     
+        
+   
+
+</body>
+</html>

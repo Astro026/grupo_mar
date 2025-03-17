@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/gerencia/base.css">
+    
+    <title>Inicio</title>
+</head>
+<body>
+    
+    <section id="sec-side_bar">
+        <div class="logo-side_bar"><img src="/static/imgs/wallpaper.png" alt=""></div>
+        <div class="items-side_bar">
+            <a href="/gerencia/"><span>Inicio</span> </a>
+            <a href="{{url_for('estoque.root')}}"><span>Estoque</span> </a>
+            <a href="#"><span>Camara-fria</span></a>
+            <a href=""><span>Produção</span></a>
+            <a href="#"><span>Rotas</span></a>
+            <a href="#"><span>Check-List de Veiculos</span></a>
+           {% if current_user.cargo == 'gerente' %} <a href="{{url_for('gerencia.usuarios')}}"><span>Usuarios</span></a> {%endif%}
+            <a href="{{url_for('auth.logout')}}"><span>Sair</span></a>
+        </div>
+    </section>
+    <section class="content">{% block content %}{% endblock %}</section>
+
+</body>
+</html>

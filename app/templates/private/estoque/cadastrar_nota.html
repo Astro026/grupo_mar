@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/estoque/cadastrar_nota.css">
+
+    <title> Cadastrar Nota</title>
+
+{% extends 'private/gerencia/base.html' %}
+
+{% block content %} 
+    <!--GESTOR DE ESTOQUE-->
+    {% if current_user.cargo == 'gestor' and current_user.setor == 'estoque' %}
+        <h1 style="text-align: center; color: white;">Dados da Nota</h1>
+        <form action="{{url_for('estoque.cadastrar_nota')}}" method="post" class="inputs_nota">
+
+            <div class="input_group">
+                <input class="input_text" type="text" name="n_nota"   minlength="3"   autocomplete="off" required>
+                <span>Numero da Nota:</span>
+            </div>
+
+            <div class="input_group">
+                <input class="input_text" type="text" name="cnpj"   minlength="4"   autocomplete="off" required>
+                <span>CNPJ:</span>
+            </div>
+            <div class="input_group">
+                <input class="input_text" type="text" name="fornecedor"   minlength="4"   autocomplete="off" required>
+                <span>Nome Fornecedor:</span>
+            </div>
+            <div class="input_group">
+                <input class="input_text" type="number" step="0.01"  name="valor_bruto"   minlength="1"   autocomplete="off" required>
+                <span>Valor Bruto:</span>
+            </div>
+
+            <div class="line"></div>
+            <div class="line"></div>
+
+            <div class="input_group">
+                <input class="input_text" type="text" name="nome_produto"   minlength="3"   autocomplete="off" required>
+                <span>Nome do Produto:</span>
+            </div>
+
+            <div class="input_group">
+                <input class="input_text" type="text" name="nt_nome_interno"   minlength="1"   autocomplete="off" required>
+                <span>Nome Interno:</span>
+            </div>
+
+            <div class="input_group">
+                <input class="input_text" type="text" name="produto_categoria"   minlength="1"   autocomplete="off" required>
+                <span>Categoria:</span>
+            </div>
+
+            <div class="input_group">
+                <input class="input_text" type="number" name="quantidade"   minlength="1"   autocomplete="off" required>
+                <span>Quantidade:</span>
+            </div>
+
+            <div class="input_group">
+                <input class="input_text" type="number" step="0.01" name="peso"   minlength="4"   autocomplete="off" required>
+                <span>Peso do produto (UND):</span>
+            </div>
+
+            <div class="input_group">
+                <input class="input_text" type="number" step="0.01" name="preco"   minlength="4"   autocomplete="off" required>
+                <span>Valor do produto:</span>
+            </div>
+
+            <button class="btn_salvar" type="submit" value="">Salvar</button>
+
+        </form>
+
+        </section><!--FECHA sub_body-->
+    {%endif%}
+
+ 
+    
+{% endblock %}

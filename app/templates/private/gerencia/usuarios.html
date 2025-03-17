@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/gerencia/usuarios.css">
+    <script src="/static/js/gerencia/deletar_usuario.js"></script>
+    <title>Usuarios</title>
+
+{% extends 'private/gerencia/base.html' %}
+
+{% block content %} 
+
+<section id="sec-main">
+   <div class="container-usuarios-ativos">
+        <div class="titulo-usuarios-ativos"> <h2>Usuarios ativos</h2></div>
+        <div class="lista-usuarios-ativos" >
+            <ul>
+                <li> 
+                    <span class="subtitulo-usuarios-ativos">Usuario</span>
+                    <span class="subtitulo-usuarios-ativos">Cargo</span> 
+                    
+                </li>
+                {% for usuario in lista_usuarios%}
+                   
+                
+
+                <div class="overlay" id="overlay" onclick="fechar_div()"></div>
+                
+                <div class="modal" id="{{usuario.user}}">
+                    <h1>Deseja realmente apagar o usuario: {{usuario.user}} ? <br>
+                    
+                    <span> Digite <span style="color: rgb(0, 0, 0);"> "deletar {{usuario.user}}" </span> para confirmar </span><br>
+                    
+                    <form method="post" action="{{url_for('gerencia.delete_perfil')}} ">
+                        <input type="text" name="confirmar_delete" placeholder="deletar {{usuario.user}}">    
+                        <button name="deletar_usuario" value="{{usuario.codigo_geral}}"> Apagar </button>  
+                    </form>
+
+                </div>
+
+                    
+                    <li> 
+                        <form method="post" > <button name="usuario" value="{{usuario.codigo_geral}}">{{usuario.user}}</button> </form>
+                        <span class="subtitulo-usuarios-ativos">{{usuario.cargo}}</span> 
+                        <div>
+                            <span>
+                                
+                                <form method="post" action="{{url_for('gerencia.editar_perfil')}} "> <button name="editar_usuario" value="{{usuario.codigo_geral}}"> <img class="icones-usuarios-ativos" src="/static/imgs/icones/lapis.png" alt="">  </form>
+                                <button id="deletar_btn" onclick="abrir_div('{{usuario.user}}')" name="deletar_usuario" value="{{usuario.codigo_geral}}">  <img class="icones-usuarios-ativos" src="/static/imgs/icones/lixeira.png" alt="">  </button> 
+                                <form action=""> <button> <img class="icones-usuarios-ativos" src="/static/imgs/icones/bloqueio.png" alt=""> </button></button> </form>
+                            </span>
+                        </div> 
+                    </li>
+                {% endfor %}
+                
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="container-novo-usuario">
+        <div class="titulo-novo-usuario"><h2> Criar novo usuario </h2></div>
+        <form action="{{url_for('gerencia.usuarios')}}" method="post" class="container-form">
+            <div class="dados-tb_user">
+
+                <div class="inputs_login">
+                    <div class="input_group">
+                        <input class="input_text" type="text" name="user" minlength="1"   autocomplete="off" required>
+                        <span>usuario:</span>
+                    </div>
+                    <div class="input_group">
+                        <input class="input_text" type="email" name="email" minlength="1"   autocomplete="off" required>
+                        <span>email:</span>
+                    </div>
+                    <div class="input_group">
+                        <input class="input_text" type="password" name="pwd" minlength="1"   autocomplete="off" required>
+                        <span>senha:</span>
+                    </div>
+                    <div class="input_group">
+                        <input class="input_text" type="password" name="confirmar_pwd" minlength="1"   autocomplete="off" required>
+                        <span>confirmar senha:</span>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+            <div class="dados-tb_perfil">
+                <div class="inputs_login">
+                    <div class="input_group">
+                        <input class="input_text" type="text" name="nome" minlength="1"   autocomplete="off" required>
+                        <span>nome:</span>
+                    </div>
+                    <div class="input_group">
+                        <input class="input_text" type="text" name="sobre_nome" minlength="1"   autocomplete="off" required>
+                        <span>sobre nome:</span>
+                    </div>
+                    <div class="input_group">
+                        <input  class="input_text" type="date" name="dt_nascimento" minlength="1"   autocomplete="off" >
+                        <span style="color: white;">data de nascimento:</span>
+                    </div>
+                    <div class="input_group">
+                        <input class="input_text" type="tel" name="tell" minlength="1"   autocomplete="off" required>
+                        <span>telefone:</span>
+                    </div>
+                    <div class="input_group">
+                        <input class="input_text" type="text" name="cnh" minlength="1"   autocomplete="off">
+                        <span>CNH:</span>
+                    </div>
+                    <div class="input_group">
+                        <input class="input_text" type="text" name="setor" minlength="1"   autocomplete="off" required>
+                        <span>setor:</span>
+                    </div>
+                    <div class="input_group">
+                        <input class="input_text" type="text" name="cargo" minlength="1"   autocomplete="off" required>
+                        <span>cargo:</span>
+                    </div>
+
+                </div>
+            </div>
+            <button class="btn_salvar" type="submit" value="">Salvar</button>
+
+        </form>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/estoque/home.css">
+    <script src="/static/js/gerencia/deletar_usuario.js"></script>
+    <title> {{current_user.user}}</title>
+
+{% extends 'private/gerencia/base.html' %}
+
+{% block content %} 
+    <!--GESTOR DE ESTOQUE-->
+    {% if current_user.cargo == 'gestor' and current_user.setor == 'estoque' %}
+        <section class="sub_body">
+            <section class="nav_bar">
+                <ul>
+                    <li><form action="{{url_for('estoque.cadastrar_nota')}}" method="get"><button>CADASTRAR NOTA</button></form></li>
+                    <li><form action="#"><button>CONFERIR NOTA</button></form></li>
+                    <li><form action="#"><button>EDITAR ESTOQUE</button></form></li>
+                </ul>
+            </section>
+            
+            <section class="exibir_estoque">
+                
+
+
+                
+            </section>
+
+
+        </section><!--FECHA sub_body-->
+    {%endif%}
+
+    {% if current_user.cargo == 'gerente' and current_user.setor == 'logistica' %}
+        <h1>logistica grente</h1>
+    {%endif%}
+
+    
+{% endblock %}

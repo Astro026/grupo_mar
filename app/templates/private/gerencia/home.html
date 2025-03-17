@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/gerencia/home.css">
+    <title>Inicio</title>
+</head>
+<body>
+    
+    {% extends 'private/gerencia/base.html' %}
+
+{% block content %} 
+    <section id="sec-main">
+        <div class="row" id="r1"> <h1>Bem vindo {{current_user.user}}</h1></div>
+        <div class="row" id="r2"></div>
+        <div class="row" id="r3"></div>
+        <div class="row" id="r4"></div>
+    </section>
+{% endblock %} 

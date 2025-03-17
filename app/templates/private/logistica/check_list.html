@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-list</title>
+</head>
+<body>
+    <h1>CHECK-LIST</h1>
+    <h2>{{veiculo.placa}} {{veiculo.modelo}}</h2>
+
+    {% if current_user.cargo == 'gestor'%}
+        <h2>CHECK-LISTS ANTERIOR</h2>
+        
+        <ul>
+            <li>Pneu</li>
+            <li>Eseplho</li>
+            <li>Combustivel</li>
+            <li>Motor</li>
+            <li>Freios</li>
+        </ul>
+    {%endif%}
+
+    {% if current_user.cargo == 'motorista'%}
+
+        <section class="container_check_list">
+            <form action="{{url_for('logistica.postar')}}">
+                veiculo
+                <input type="text"  name="codigo_veiculo" value="{{veiculo.codigo_geral_veiculo}}"> <br>
+                <span>Peus</span>
+                <input type="text" name="pneus">
+                <br>
+                <span>espelhos</span>
+                <input type="text" name="espelhos">
+                <input type="submit">
+            </form>
+        </section>
+    {%endif%}
+
+    
+</body>
+</html>
