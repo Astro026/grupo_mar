@@ -53,29 +53,23 @@ def cadastrar_nota():
 @estoque_bp.route('/teste', methods=[ 'GET', 'POST'])
 @login_required
 def teste():
-    nova_categoria = tb_categoria_interno_produto__estoque_producao(categoria_interno='Fruta')
-    novo_nome = tb_nome_interno_produto__estoque_producao(nome_interno='Banana')
-    nova_nota = tb_entrada_nota__estoque_producao(numero='SE123', serie='1', fornecedor='SEASA', cnpj='12.123.123/0001-61', valor=200.00, chave='chave acesso2', data_entrada='26/02/2004',img='DIRETORIO IMG', usuario=current_user.codigo_geral)
-    novo_produto = tb_produto_nota_entrada__estoque_producao(nova_nota.numero_tb_entrada_nota, 'banana', 2)
-    
-    produtos = tb_produto_nota_entrada__estoque_producao.query.all()
-    produto_certo = []
-    
-    #db.session.add(nova_categoria)
-    #db.session.add(novo_nome)
+    if request.method == 'POST':
+        print("POST_++++++++++++++++++++++++++++++++++++++++")
+        nome_produto = request.form.get('nome_produto')
+        categoria_produto = request.form.get('categoria_produto')
+        quantidade_produto = request.form.get('quantidade_produto')
 
-    #db.session.add(nova_nota)
-    
-    #db.session.add(novo_produto)
-    #db.session.commit()
+        novo_produto = Estoque(int(nome_produto),categoria_produto,quantidade_produto)
+        db.session.add(novo_produto)
+        db.session.commit()
+        
+    estoque = Estoque.query.all()
+    return render_template('/private/estoque/teste.html', estoque=estoque)
 
-    #Codigo que retorna os nomes_internos do produto de uma nota
-    produtoComNome = db.session.query(tb_produto_nota_entrada__estoque_producao.nome_interno_produto_tb_produto_nota_entrada, tb_nome_interno_produto__estoque_producao.nome_interno_tb_nome_interno_produto).join(tb_nome_interno_produto__estoque_producao, tb_produto_nota_entrada__estoque_producao.nome_interno_produto_tb_produto_nota_entrada == tb_nome_interno_produto__estoque_producao.id_tb_nome_interno_produto).all()
-    prod = []
-    for produto in produtoComNome:
-        prod.append(produto)
-        print(produto, '=-----------------------------=-=-=-=-=-=------=-=-=-=')
-    return f'produto_certo: {prod}'
+
+
+
+    
 
 
 #Padrão para levar o cargo para a rota correta

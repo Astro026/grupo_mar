@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>TESTE ESTOQUE</h1>
+    <form action="{{url_for('estoque.teste')}}" method="POST">
+        <span>Nome Produto</span>
+        <input name="nome_produto" type="number">
+
+        <span>Categoria</span>
+        <input name="categoria_produto" type="number">
+
+        <span>Quantidade</span>
+        <input name="quantidade_produto" type="number">
+
+        <input type="submit">
+    </form>
+
+    <section style="background-color: grey;">
+        <h2>Estoque</h2>
+        {%for produto in estoque%}
+        {{produto.nome_produto.nome_produto}}
+        {{produto.quantidade}} <br>
+        {%endfor%}
+    </section>
+    <ul>
+        <li>2	Banana</li>
+        <li>4	Cx doce gelato</li>
+        <li>3	Cx natureza</li>
+        <li>1	Morango</li>
+    </ul>
+    <ul>
+        <li>2	Embalagens</li>
+        <li>1	Frutas</li>
+        <li>3	Rotulos</li>
+    </ul>
+</body>
+</html>
