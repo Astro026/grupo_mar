@@ -1,0 +1,60 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/financeiro/home.css">
+    <title>Início</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Bem-vindo {{current_user.user}}</h1>
+    <h2>Siga os seguintes passos para a utilização do sistema.</h2>
+    <ul>
+        <li>1 - Vá ao Chat-GPT</li>
+        <li>2 - Cole este prompt [ ]</li>
+        <li>3 - Baixe o arquivo e faça upload no sistema</li>
+    </ul>
+    <p>Garanta que as colunas do arquivo estejam com os nomes corretos (nome, setor, cargo, salário, bônus, data de pagamento).</p>
+    <br>
+    <h3>Anexe o arquivo para gerar os relatórios</h3>
+    <form action="{{url_for('financeiro.root')}}" method="POST" enctype="multipart/form-data">
+        <input name="base_dados" type="file" accept=".csv, .xlsx, .xls" required>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <h2>Custo Total por Setor</h2>
+    {{ grafico_custo|safe }}
+
+    <h2>Maiores Bônus por Setor</h2>
+    {{ grafico_maiores_bonus|safe }}
+    
+    <section class="dash">
+        {% if base != 'False' %}
+            <div class="titulos_dash">
+                <ul>
+                    <li>Nome</li>
+                    <li>Setor</li>
+                    <li>Cargo</li>
+                    <li>Salário</li>
+                    <li>Bônus</li>
+                    <li>Data de pagamento</li>
+                </ul>
+            </div>
+        {% endif %}
+
+        {% for registro in base %}
+            <div class="dados_dash">
+                <ul>
+                    <li>{{registro['nome']}}</li>
+                    <li>{{registro['setor']}}</li>
+                    <li>{{registro['cargo']}}</li>
+                    <li>{{registro['salario']}}</li>
+                    <li>{{registro['bonus']}}</li>
+                    <li>{{registro['data de pagamento']}}</li>
+                </ul>
+            </div>
+        {% endfor %}
+    </section>
+</body>
+</html>
