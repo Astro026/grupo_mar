@@ -3,17 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/logistica/lista_checklist.css">
+    <script src="/static/js/logistica/lista_checklist.js" defer></script>
+    
     <title>Check-list</title>
 </head>
 <body>
-    <h1>CHECK-LIST</h1>
-    <div class="dados_veiculo">
-        <h2>Dados do veiculo</h2>
-        <span>Placa: {{veiculo.placa}}</span> <br>
-        <span>Modelo: {{veiculo.modelo}}</span>
+    <div class="container">
+        <h1>CHECK-LIST</h1>
+        <div class="dados_veiculo">
+            <h2>Dados do Veículo</h2>
+            <p><strong>Placa:</strong> {{ veiculo.placa }}</p>
+            <p><strong>Modelo:</strong> {{ veiculo.modelo }}</p>
+        </div>
+        <h2>Checklists</h2>
+        <ul class="checklist">
+            {% for checklist in checklists %}
+                <li onclick="toggleItems({{ loop.index }})">
+                    {{ checklist.data_check.strftime('%d/%m/%Y') }}
+                    <div id="itens-{{ loop.index }}" class="itens">
+                        <ul>
+                            {% for item in checklist.itens %}
+                                <li><strong>{{ item.nome }}</strong>: {{ item.valor }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
-    {% for item in list_item %}
-        {{item}} <br>
-    {%endfor%}
 </body>
 </html>

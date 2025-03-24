@@ -26,17 +26,9 @@ def lista_checklist(id_veiculo):
     lista_checklist = Checklist.query.filter_by(veiculo_id=veiculo.codigo_geral_veiculo).all()
     #lista de items
     checklists = Checklist.query.filter_by(veiculo_id=veiculo.codigo_geral_veiculo).all()
+    
 
-    resultado = []
-    for checklist in checklists:
-        itens = [{"nome": item.nome, "valor": item.valor} for item in checklist.itens]
-        resultado.append({
-            "id": checklist.id,
-            "data_check": checklist.data_check,
-            "itens": itens
-        })
-
-    return render_template('private/logistica/lista_checklist.html',veiculo=veiculo, list_item=resultado)
+    return render_template('private/logistica/lista_checklist.html',veiculo=veiculo, checklists=checklists)
 
             
 
