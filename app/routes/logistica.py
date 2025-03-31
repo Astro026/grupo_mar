@@ -11,10 +11,8 @@ logistica_bp = Blueprint('logistica', __name__, template_folder='templates')
 @logistica_bp.route('/', methods=[ 'GET', 'POST'])
 @login_required
 def root():
-    print(current_user)
     veiculos = Veiculos.query.all()
-        
-    return render_template('private/logistica/motorista.html', veiculos=veiculos)
+    return render_template('private/logistica/home.html', veiculos=veiculos)
     
     
 @logistica_bp.route('/lista/<id_veiculo>')
@@ -24,10 +22,14 @@ def lista_checklist(id_veiculo):
     
     #lista com todos os checklist
     lista_checklist = Checklist.query.filter_by(veiculo_id=veiculo.codigo_geral_veiculo).all()
+    
     #lista de items
     checklists = Checklist.query.filter_by(veiculo_id=veiculo.codigo_geral_veiculo).all()
-    
-
+    for checklist in checklists:
+        print(checklist.codigo_geral_user)
+        for item in checklist.itens:
+            print(item.nome,'=======================================')
+        
     return render_template('private/logistica/lista_checklist.html',veiculo=veiculo, checklists=checklists)
 
             
@@ -52,21 +54,25 @@ def veiculo(placa_veiculo):
     return render_template('private/logistica/check_list.html', veiculo=veiculo)
 
 
-@logistica_bp.route('/postar', methods=[ 'GET', 'POST'])
+@logistica_bp.route('/salvar_checklist/<placa>', methods=[ 'GET', 'POST'])
 @login_required
-def postar():
+def salvar_checklist(placa):
     problema = request.args.to_dict()
-    check_list = Checklist(veiculo_id=problema['codigo_veiculo'])
+    veiculo = Veiculos.query.filter_by(placa=placa).first()
+
+    check_list = Checklist(veiculo_id=veiculo.codigo_geral_veiculo, codigo_geral_user = current_user.codigo_geral)
     print(f'================={check_list}')
     db.session.add(check_list)
     db.session.commit()
     for chave, valor in request.args.items():
+        #print(f'{chave}: {valor}')
+        
         print(f'{chave}: {valor}')
         item =(ChecklistItem( checklist_id = check_list.id, nome = chave, valor = valor))
         db.session.add(item)
-    db.session.commit()
+        db.session.commit()
     
-    return f'{problema["codigo_veiculo"]}'
+    return f'{problema} '
 
 
 
@@ -78,9 +84,9 @@ def postar():
 def teste():
     veiculos_list = [['RGN2E19','Delivery', 500, '20/06/2016'], ['ABC1D23','Bongo', 200, '10/08/2004'], ['XYZ4F56','Strada', 90, '02/02/2025']]
    
-    #veiculo = Veiculos('RGN2E19','Delivery', 500, '20/06/2016')
-    #db.session.add(veiculo)
-   # db.session.commit()
+    veiculo = Veiculos('RGN2E19','Delivery', 500, '20/06/2016')
+    db.session.add(veiculo)
+    db.session.commit()
     for veiculo in veiculos_list:
         print(veiculo)
         novo_veiculo = Veiculos(veiculo[0],veiculo[1],veiculo[2],veiculo[3])

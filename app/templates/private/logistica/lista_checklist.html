@@ -20,6 +20,7 @@
         <ul class="checklist">
             {% for checklist in checklists %}
                 <li onclick="toggleItems({{ loop.index }})">
+                    <h3> Autor: {{ checklist.usuario.user }}</h3>
                     {{ checklist.data_check.strftime('%d/%m/%Y') }}
                     <div id="itens-{{ loop.index }}" class="itens">
                         <ul>

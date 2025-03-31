@@ -1,21 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/logistica/check_list.css">
+    <script src="/static/js/logistica/checklist.js" defer></script>
+    
     <title>Check-list</title>
+
 </head>
 <body>
     <h1>CHECK-LIST</h1>
     <h2>{{veiculo.placa}} {{veiculo.modelo}}</h2>
-
+    
     {% if current_user.cargo == 'gestor'%}
         <h2>CHECK-LISTS ANTERIOR</h2>
-        
+        verificar isso aqui
         <ul>
             <li>Pneu</li>
-            <li>Eseplho</li>
-            <li>Combustivel</li>
+            <li>Espelho</li>
+            <li>Combustível</li>
             <li>Motor</li>
             <li>Freios</li>
         </ul>
@@ -23,20 +26,270 @@
 
     {% if current_user.cargo == 'motorista'%}
 
-        <section class="container_check_list">
-            <form action="{{url_for('logistica.postar')}}">
-                veiculo
-                <input type="text"  name="codigo_veiculo" value="{{veiculo.codigo_geral_veiculo}}"> <br>
-                <span>Peus</span>
-                <input type="text" name="pneus">
-                <br>
-                <span>espelhos</span>
-                <input type="text" name="espelhos">
-                <input type="submit">
-            </form>
-        </section>
-    {%endif%}
+    <section class="container_check_list">
+        <form action="{{ url_for('logistica.salvar_checklist', placa=veiculo.placa) }}">
+           
+            <section id="sec1" class="section collapsed" onclick="toggleSection('sec1')">
+                <h2>Documentação</h2>
+                <div class="input_group">
+                    <span class="titulo">Documentos</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Documentação" value="Sim"> Sim
+                        </label>
+                        <label>
+                            <input type="radio" name="Documentação" value="Não"> Não
+                        </label>
+                    </div>
+                </div>
+                <div class="input_group">
+                    <span class="titulo">Maquina de cartão</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Maquina" value="Sim"> Sim
+                        </label>
+                        <label>
+                            <input type="radio" name="Maquina" value="Não"> Não
+                        </label>
+                    </div>
+                </div>
+            </section>
 
-    
+            <section id="sec2" class="section collapsed" onclick="toggleSection('sec2')">
+                <h2>Condições e estado</h2>
+                <div class="input_group">
+                    <span class="titulo">Condições dos Pneus</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Pneus" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Pneus" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Pneus" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input_group">
+                    <span class="titulo">Condições Freios</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Freios" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Freios" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Freios" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="input_group">
+                    <span class="titulo">Estado Geral da Carroceria (arranhões)</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Arranhões" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Arranhões" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Arranhões" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+                 
+                <div class="input_group">
+                    <span class="titulo">Estado Geral da Carroceria (amassados)</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Amassados" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Amassados" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Amassados" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+
+                 
+                <div class="input_group">
+                    <span class="titulo">Condições dos Espelhos Retrovisores internos</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Retrovisores Internos" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Retrovisores Internos" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Retrovisores Internos" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input_group">
+                    <span class="titulo"> Condições Vidros e Espelhos (EXTERNOS)</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Condições Vidros e Espelhos (EXTERNOS)" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Condições Vidros e Espelhos (EXTERNOS)" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Condições Vidros e Espelhos (EXTERNOS)" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+          
+            </section>
+
+
+            <section id="sec3" class="section collapsed" onclick="toggleSection('sec3')">
+                <h2>Funcionamento Elétrico e Eletrônico</h2>
+                <div class="input_group">
+                    <span class="titulo">Bateria (Carga e Condições)</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Bateria" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Bateria" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Bateria" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input_group">
+                    <span class="titulo"> Farois e Lanternas</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Farois e Lanternas" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Farois e Lanternas" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Farois e Lanternas" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input_group">
+                    <span class="titulo"> Luzes Internas</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Luzes Internas" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Luzes Internas" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Luzes Internas" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input_group">
+                    <span class="titulo"> Sinais de alerta do painel (verificar funcionamento) </span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Sinais de alerta do painel" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Sinais de alerta do painel" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Sinais de alerta do painel" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+
+                
+                <div class="input_group">
+                    <span class="titulo"> Ar condicionado </span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Ar condicionado" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Ar condicionado" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Ar condicionado" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input_group">
+                    <span class="titulo"> Sistema de Som </span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Sistema de Som" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Sistema de Som" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Sistema de Som" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input_group">
+                    <span class="titulo"> Limpador de para-brisa </span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Limpador de para-brisa" value="Bom"> Bom
+                        </label>
+                        <label>
+                            <input type="radio" name="Limpador de para-brisa" value="Medio"> Medio
+                        </label>
+                        <label>
+                            <input type="radio" name="Limpador de para-brisa" value="Ruim"> Ruim
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec4" class="section collapsed" onclick="toggleSection('sec4')">
+                <h2>Documentação</h2>
+                <div class="input_group">
+                    <span class="titulo">Documentos</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Documentação" value="Sim"> Sim
+                        </label>
+                        <label>
+                            <input type="radio" name="Documentação" value="Não"> Não
+                        </label>
+                    </div>
+                </div>
+                <div class="input_group">
+                    <span class="titulo">Maquina de cartão</span>
+                    <div class="group_radio">
+                        <label>
+                            <input type="radio" name="Maquina" value="Sim"> Sim
+                        </label>
+                        <label>
+                            <input type="radio" name="Maquina" value="Não"> Não
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <input type="submit" name="" id="">
+        </form>
+    </section>
+{%endif%}
+
+  
 </body>
 </html>

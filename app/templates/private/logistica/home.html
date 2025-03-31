@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/logistica/motorista.css">
+    <link rel="stylesheet" href="/static/css/logistica/home.css">
     <title>Inicio</title>
 </head>
 <body>
-    <h1>Bem vindo {{current_user.user}} <h1>
+    <h1>Bem-vindo, {{ current_user.user }}!</h1>
+    
     <section class="container_veiculos">
         
         {% for veiculo in veiculos %} 
-            <a href="/logistica/veiculo/{{veiculo.placa}}" class="card_veiculo">
+            <a href="/logistica/veiculo/{{ veiculo.placa }}" class="card_veiculo">
                 <div class="foto_veiculo">
-                    <img src="/static/imgs/veiculos/{{veiculo.placa}}.jpeg" alt="bongo">
+                    <img src="/static/imgs/veiculos/{{ veiculo.placa }}.jpeg" alt="Imagem do veículo">
                 </div>
-                <div class="placa">{{veiculo.placa}}</div>
+                <div class="placa">{{ veiculo.placa }}</div>
             </a>
-            
-        {%endfor%} 
-
+        {% endfor %} 
     </section>
-     
-        
-   
 
+    {% if current_user.cargo != 'motorista'%}
+        {{current_user.user}}
+    {%endif%}
 </body>
+
 </html>

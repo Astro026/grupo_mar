@@ -6,3 +6,6 @@ function toggleItems(index) {
         itensDiv.style.display = "block";
     }
 }
+
+
+
