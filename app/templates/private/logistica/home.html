@@ -9,21 +9,11 @@
 <body>
     <h1>Bem-vindo, {{ current_user.user }}!</h1>
     
-    <section class="container_veiculos">
-        
-        {% for veiculo in veiculos %} 
-            <a href="/logistica/veiculo/{{ veiculo.placa }}" class="card_veiculo">
-                <div class="foto_veiculo">
-                    <img src="/static/imgs/veiculos/{{ veiculo.placa }}.jpeg" alt="Imagem do veículo">
-                </div>
-                <div class="placa">{{ veiculo.placa }}</div>
-            </a>
-        {% endfor %} 
+    <section class="menu_main">
+        <form action="{{url_for('logistica.area_notas')}}"> <button class="btt_menu_main">Area de Notas</button> </form>
+        <form action="{{url_for('logistica.area_check_list')}}"> <button class="btt_menu_main">Area de Check-List</button> </form>
     </section>
-
-    {% if current_user.cargo != 'motorista'%}
-        {{current_user.user}}
-    {%endif%}
+    
 </body>
 
 </html>

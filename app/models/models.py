@@ -69,6 +69,7 @@ class Veiculos(db.Model):
 
 class Checklist(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    codigo = db.Column(db.String(20), unique=True, nullable=False)
     veiculo_id = db.Column(db.VARCHAR(20), db.ForeignKey('veiculos.codigo_geral_veiculo'), nullable=False)
     data_check = db.Column(db.DateTime, default=db.func.current_timestamp())
     codigo_geral_user = db.Column('codigo_geral_user', db.ForeignKey('users.codigo_geral'), nullable=False)
@@ -76,6 +77,10 @@ class Checklist(db.Model):
     usuario = db.relationship('User', backref='checklists')
     itens = db.relationship('ChecklistItem', backref='checklist', lazy=True, cascade="all, delete-orphan")
     
+    def to_dict(self):
+        return {"id": self.id, "codigo": self.codigo}
+
+
 # ✅ Tabela de Itens do Checklist (Atributos Variáveis)
 class ChecklistItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/logistica/area_check_list.css">
+    <script src="/static/js/logistica/geral.js"></script>
+    <title>Inicio</title>
+</head>
+<body>
+    
+    
+    <!-- INI MOTORISTA-->
+    {%if current_user.cargo == 'motorista'%}
+    <h1>Bem-vindo, {{ current_user.user }}!</h1>    
+    <section class="container_veiculos">
+        
+        {% for veiculo in veiculos %} 
+            <a href="/logistica/veiculo/{{ veiculo.placa }}" class="card_veiculo">
+                <div class="foto_veiculo">
+                    <img src="/static/imgs/veiculos/{{ veiculo.placa }}.jpeg" alt="Imagem do veículo">
+                </div>
+                <div class="placa">{{ veiculo.placa }}</div>
+            </a>
+        {% endfor %} 
+    {%endif%}
+    </section>
+
+    
+    <!-- END MOTORISTA-->
+
+
+
+
+
+
+
+
+    <!-- INI GESTOR -->
+    
+    {% if current_user.cargo != 'motorista'%}
+    <section class="alerta_problemas">
+
+        <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            {%for check_list in lista_todos_check_list%}
+            {%for item in check_list.itens%}
+                {%if item.valor == 'Ruim'%}
+               
+                    <div class="info-box">
+                        <ul>
+                            <li>Cod: {{check_list.codigo}}</li>
+                            <li> <span class="nome_problema">{{item.nome}}</span> - <span class="nivel_problema">{{item.valor}}</span></li>
+                        </ul>
+                    </div>
+                
+                {%endif%}
+            {%endfor%}
+        {%endfor%}
+       
+        </aside>
+
+        <!-- Conteúdo principal -->
+        <main class="content">
+            <h1>Bem-vindo ao Sistema</h1>
+            
+            <!-- Seção de pesquisa -->
+            <div class="search-section">
+                <h3>Escolha um critério de pesquisa:</h3>
+                
+                <div class="radio-group">
+                    <input type="radio" name="searchType" id="searchMotorista" value="motorista" checked>
+                    <label for="searchMotorista">Motorista</label>
+
+                    <input type="radio" name="searchType" id="searchData" value="data">
+                    <label for="searchData">Data</label>
+
+                    <input type="radio" name="searchType" id="searchNivel" value="nivel">
+                    <label for="searchNivel">Nível de Defeito</label>
+                </div>
+
+                <!-- Input dinâmico -->
+                <input type="text" id="searchInput" placeholder="Digite para pesquisar...">
+                
+                <!-- Botão de busca -->
+                <button onclick="pesquisar()">Pesquisar</button>
+            </div>
+
+
+
+        
+            {%for check_list in lista_todos_check_list%}
+            <div class="expand-box" onclick="toggleExpand(this)">
+                    <a href="/logistica/check-list/{{check_list.codigo}}">Abrir check_list</a>
+                    <h3>Autor: {{check_list.usuario.user}} - Codigo: {{check_list.codigo}} - Data: {{ check_list.data_check.strftime('%d/%m/%Y %H:%M:%S') }}</h3>
+                    <br>
+                    {%for item in check_list.itens%}
+                        <p class="expand-content">{{item.nome}} : {{item.valor}}</p>
+                    {%endfor%}
+                </div>
+            {%endfor%}
+        </main>
+    </div>
+
+    </section>
+    {%endif%}
+
+
+
+
+    <!-- END GESTOR-->
+
+</body>
+
+</html>
