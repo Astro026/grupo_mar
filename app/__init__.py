@@ -14,7 +14,6 @@ lm = LoginManager(app)
 
 #Variavel AWS
 """
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:226226uy@astrocode.cdee0eaoc82b.us-east-2.rds.amazonaws.com:3306/grupo_mar'
 app.config['SQLALCHEMY_BINDS'] = {'estoque_producao':'mysql+pymysql://admin:226226uy@astrocode.cdee0eaoc82b.us-east-2.rds.amazonaws.com:3306/estoque_producao'}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
